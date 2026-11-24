@@ -1,0 +1,7 @@
+{
+  "name": "movird",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
