@@ -34,4 +34,62 @@
 
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
-@import '@ionic/angular/css/palettes/dark.system.css';
+/* @import "@ionic/angular/css/palettes/dark.system.css"; */
+
+@import '@fontsource/manrope/600.css';
+@import '@fontsource/manrope/700.css';
+@import '@fontsource/manrope/800.css';
+@import '@fontsource/dm-sans/400.css';
+@import '@fontsource/dm-sans/500.css';
+@import '@fontsource/dm-sans/700.css';
+@import '@fontsource/dm-sans/800.css';
+
+h1,
+h2,
+h3,
+ion-title {
+  font-family: 'Manrope', sans-serif;
+  font-weight: 600;
+}
+
+ion-button {
+  font-weight: 700;
+}
+
+// Encabezado de las pantallas
+.movird-header ion-toolbar {
+  --min-height: 64px;
+  --padding-start: 12px;
+  --padding-end: 12px;
+}
+
+.movird-header ion-title {
+  font-size: 17px;
+  text-align: center;
+}
+
+.movird-header ion-menu-button {
+  --background: #ffffff;
+  --border-radius: 50%;
+  --color: var(--movird-ink);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  box-shadow: 0 4px 14px rgba(74, 45, 42, 0.1);
+}
+
+// Compensa el ancho del botón de menú para centrar el título
+.header-spacer {
+  width: 40px;
+}
+
+@media (min-width: 768px) {
+  .header-spacer {
+    display: none;
+  }
+}
+
+.placeholder {
+  color: var(--movird-muted);
+  font-size: 13px;
+}

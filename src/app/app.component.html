@@ -1,49 +1,55 @@
 <ion-app>
-  <ion-split-pane contentId="main-content">
+  <ion-split-pane contentId="main-content" when="md">
     <ion-menu contentId="main-content" type="overlay">
-      <ion-content>
-        <ion-list id="inbox-list">
-          <ion-list-header>Inbox</ion-list-header>
-          <ion-note>hi&#64;ionicframework.com</ion-note>
+      <ion-header class="ion-no-border">
+        <ion-toolbar class="menu-toolbar">
+          <div class="logo">
+            <span class="logo-mark"><span></span></span>
+            <span>Movi<b>RD</b></span>
+          </div>
+          <ion-buttons slot="end">
+            <ion-menu-toggle>
+              <ion-button class="menu-close" aria-label="Cerrar menú">
+                <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+              </ion-button>
+            </ion-menu-toggle>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
 
-          @for (p of appPages; track p; let i = $index) {
-            <ion-menu-toggle auto-hide="false">
+      <ion-content>
+        <p class="menu-kicker">Explora</p>
+        <ion-list lines="none">
+          @for (p of appPages; track p.url) {
+            <ion-menu-toggle [autoHide]="false">
               <ion-item
+                button
+                detail="false"
                 routerDirection="root"
                 [routerLink]="[p.url]"
-                lines="none"
-                detail="false"
                 routerLinkActive="selected"
               >
-                <ion-icon
-                  aria-hidden="true"
-                  slot="start"
-                  [ios]="p.icon + '-outline'"
-                  [md]="p.icon + '-sharp'"
-                ></ion-icon>
+                <div class="menu-icon" slot="start">
+                  <ion-icon aria-hidden="true" [name]="p.icon + '-outline'"></ion-icon>
+                </div>
                 <ion-label>{{ p.title }}</ion-label>
               </ion-item>
             </ion-menu-toggle>
           }
         </ion-list>
-
-        <ion-list id="labels-list">
-          <ion-list-header>Labels</ion-list-header>
-
-          @for (label of labels; track label) {
-            <ion-item lines="none">
-              <ion-icon
-                aria-hidden="true"
-                slot="start"
-                ios="bookmark-outline"
-                md="bookmark-sharp"
-              ></ion-icon>
-              <ion-label>{{ label }}</ion-label>
-            </ion-item>
-          }
-        </ion-list>
       </ion-content>
+
+      <ion-footer class="ion-no-border">
+        <div class="menu-note">
+          <strong>
+            <ion-icon name="information-circle-outline" aria-hidden="true"></ion-icon>
+            Datos de demostración
+          </strong>
+          <p>Los parqueos, precios y horarios de MoviRD son simulados.</p>
+        </div>
+      </ion-footer>
     </ion-menu>
+
     <ion-router-outlet id="main-content"></ion-router-outlet>
   </ion-split-pane>
 </ion-app>

@@ -1,2 +1,30 @@
 // For information on how to create your own theme, please refer to:
 // https://ionicframework.com/docs/theming/
+
+:root {
+  // Paleta MoviRD
+  --movird-red: #d94848;
+  --movird-red-dark: #b9363b;
+  --movird-coral: #f28b82;
+  --movird-coral-soft: #ffe3df;
+  --movird-cream: #fff8f7;
+  --movird-white: #ffffff;
+  --movird-ink: #292929;
+  --movird-muted: #777777;
+  --movird-border: #eae3e2;
+
+  --ion-color-primary: #d94848;
+  --ion-color-primary-rgb: 217, 72, 72;
+  --ion-color-primary-contrast: #ffffff;
+  --ion-color-primary-contrast-rgb: 255, 255, 255;
+  --ion-color-primary-shade: #bf3f3f;
+  --ion-color-primary-tint: #dd5a5a;
+
+  --ion-background-color: #fff8f7;
+  --ion-background-color-rgb: 255, 248, 247;
+  --ion-text-color: #292929;
+  --ion-text-color-rgb: 41, 41, 41;
+  --ion-toolbar-background: #fff8f7;
+  --ion-item-background: #ffffff;
+  --ion-font-family: 'DM Sans', sans-serif;
+}
