@@ -3,8 +3,7 @@ ion-menu {
 }
 
 ion-menu ion-content,
-ion-menu ion-toolbar,
-ion-menu ion-footer {
+ion-menu ion-toolbar {
   --background: var(--movird-white);
   background: var(--movird-white);
 }
@@ -108,35 +107,6 @@ ion-menu ion-item.selected {
   .menu-icon {
     background: var(--movird-red);
     color: var(--movird-white);
-  }
-}
-
-// Nota inferior
-.menu-note {
-  margin: 0 16px calc(var(--ion-safe-area-bottom, 0px) + 24px);
-  padding: 12px;
-  border-radius: 14px;
-  background: var(--movird-cream);
-
-  strong {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 13px;
-    color: var(--movird-ink);
-  }
-
-  ion-icon {
-    color: var(--movird-red);
-    font-size: 16px;
-  }
-
-  p {
-    margin: 8px 0 0;
-    color: var(--movird-muted);
-    font-size: 12px;
-    font-weight: 500;
-    line-height: 1.45;
   }
 }
 
