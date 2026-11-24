@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular/lazy';
 
-import { FolderPageRoutingModule } from './folder-routing.module';
+import { MapaPageRoutingModule } from './mapa-routing.module';
 
-import { FolderPage } from './folder.page';
+import { MapaPage } from './mapa.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    FolderPageRoutingModule
+    MapaPageRoutingModule
   ],
-  declarations: [FolderPage]
+  declarations: [MapaPage]
 })
-export class FolderPageModule {}
+export class MapaPageModule {}
