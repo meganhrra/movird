@@ -6,8 +6,8 @@ import { MapaPage } from './mapa.page';
 const routes: Routes = [
   {
     path: '',
-    component: MapaPage
-  }
+    component: MapaPage,
+  },
 ];
 
 @NgModule({

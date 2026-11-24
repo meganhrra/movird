@@ -9,7 +9,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "format": "prettier --write src"
   },
   "private": true,
   "dependencies": {
@@ -42,6 +43,7 @@
     "angular-eslint": "22.6.0",
     "eslint": "^10.10.0",
     "jsdom": "^31.0.0",
+    "prettier": "^3.10.1",
     "typescript": "~6.0.0",
     "typescript-eslint": "^8.61.0",
     "vitest": "^5.1.0"

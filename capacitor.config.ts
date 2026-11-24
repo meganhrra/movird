@@ -1,9 +1,9 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: 'movird',
-  webDir: 'www'
+  appId: 'com.movird.app',
+  appName: 'MoviRD',
+  webDir: 'www',
 };
 
 export default config;

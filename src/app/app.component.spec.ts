@@ -7,10 +7,7 @@ import { AppComponent } from './app.component';
 import { AppModule } from './app.module';
 
 describe('AppComponent', () => {
-
-
   beforeEach(async () => {
-
     await TestBed.configureTestingModule({
       imports: [AppModule],
     }).compileComponents();
@@ -56,5 +53,4 @@ describe('AppComponent', () => {
     expect(router.serializeUrl(links[0].urlTree!)).toEqual('/folder/Inbox');
     expect(router.serializeUrl(links[1].urlTree!)).toEqual('/folder/Outbox');
   });
-
 });
