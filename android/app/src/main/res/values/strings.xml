@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">MoviRD</string>
+    <string name="title_activity_main">MoviRD</string>
+    <string name="package_name">com.movird.app</string>
+    <string name="custom_url_scheme">com.movird.app</string>
+</resources>
