@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { NgClass } from '@angular/common';
+import { NgClass, NgIf } from '@angular/common';
 import { IonicModule } from '@ionic/angular/lazy';
 import { addIcons } from 'ionicons';
 import { carSportOutline, heart, chevronForwardOutline } from 'ionicons/icons';
@@ -8,9 +8,15 @@ import { Parqueo } from '../../data/parking';
 @Component({
   selector: 'app-parking-card',
   standalone: true,
-  imports: [NgClass, IonicModule],
+  imports: [NgClass, NgIf, IonicModule],
   template: `
-    <ion-card class="parking-card">
+    <ion-card
+  class="parking-card"
+  (pointerdown)="iniciarPulsacion()"
+  (pointerup)="cancelarPulsacion()"
+  (pointerleave)="cancelarPulsacion()"
+  (pointercancel)="cancelarPulsacion()"
+  >
       <div class="top">
         <div class="icon-box">
           <ion-icon name="car-sport-outline"></ion-icon>
@@ -39,6 +45,12 @@ import { Parqueo } from '../../data/parking';
           <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
         </ion-button>
       </div>
+      <div class="opciones-presion" *ngIf="opcionesVisibles">
+  <ion-button size="small" fill="clear" (click)="opcionesVisibles = false">
+    Cerrar opciones
+  </ion-button>
+  <span>Opciones del parqueo: {{ parqueo.nombre }}</span>
+</div>
     </ion-card>
   `,
   styles: [
@@ -125,6 +137,23 @@ import { Parqueo } from '../../data/parking';
 })
 export class ParkingCardComponent {
   @Input({ required: true }) parqueo!: Parqueo;
+  opcionesVisibles = false;
+private temporizador?: ReturnType<typeof setTimeout>;
+
+iniciarPulsacion() {
+  this.cancelarPulsacion();
+
+  this.temporizador = setTimeout(() => {
+    this.opcionesVisibles = true;
+  }, 500);
+}
+
+cancelarPulsacion() {
+  if (this.temporizador) {
+    clearTimeout(this.temporizador);
+    this.temporizador = undefined;
+  }
+}
 
   constructor() {
     addIcons({ carSportOutline, heart, chevronForwardOutline });
