@@ -1,0 +1,110 @@
+ion-content {
+  --background: #efe6df;
+}
+
+.mapa {
+  position: absolute;
+  inset: 0;
+  background-color: #efe6df;
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+  background-size: 28px 28px;
+  overflow: hidden;
+  transform-origin: center center;
+touch-action: none;
+
+  .calle {
+    position: absolute;
+    top: 52%;
+    left: 14px;
+    font-size: 11px;
+    color: #777;
+    transform: rotate(-4deg);
+  }
+  .pin {
+    position: absolute;
+    font-size: 32px;
+    color: var(--movird-red, #d94848);
+  }
+  .precio-pin {
+    position: absolute;
+    background: var(--movird-red, #d94848);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 5px 10px;
+    border-radius: 10px;
+  }
+}
+
+.barra-superior {
+  position: absolute;
+  top: calc(var(--ion-safe-area-top, 0px) + 16px);
+  left: 16px;
+  right: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+
+  .menu-flotante {
+    position: absolute;
+    left: 0;
+    --background: #fff;
+    --border-radius: 50%;
+    --color: var(--movird-ink, #292929);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    box-shadow: 0 4px 14px rgba(74, 45, 42, 0.1);
+  }
+}
+
+.titulo-chip {
+  background: #fff;
+  padding: 6px 14px;
+  border-radius: 14px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.buscador-fila {
+  position: absolute;
+  top: calc(var(--ion-safe-area-top, 0px) + 72px);
+  left: 16px;
+  right: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 2;
+
+  .buscador {
+    --background: #fff;
+    --border-radius: 16px;
+    --box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 0;
+    flex: 1;
+  }
+
+  .filtro-btn {
+    --background: var(--movird-red, #d94848);
+    --border-radius: 14px;
+    --color: #fff;
+    width: 48px;
+    height: 48px;
+    margin: 0;
+  }
+}
+
+.fab-ruta {
+  z-index: 2;
+}
+
+.tarjeta-inferior {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: calc(var(--ion-safe-area-bottom, 0px) + 24px);
+  z-index: 2;
+}
