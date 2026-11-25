@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { addIcons } from 'ionicons';
+import { refreshOutline } from 'ionicons/icons';
+import { Parqueo, PARQUEOS } from '../../data/parking';
 
 @Component({
   selector: 'app-favoritos',
@@ -6,4 +9,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./favoritos.page.scss'],
   standalone: false,
 })
-export class FavoritosPage {}
+export class FavoritosPage {
+  readonly favoritos: Parqueo[] = PARQUEOS.filter((parqueo) => parqueo.favorito);
+
+  constructor() {
+    addIcons({ refreshOutline });
+  }
+}

@@ -8,6 +8,18 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding">
-  <p class="placeholder">Pantalla Favoritos en construcción.</p>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <h1 class="titulo">Mis favoritos</h1>
+
+  <div class="refresh-wrap">
+    <ion-button class="refresh-btn" fill="clear" aria-label="Actualizar favoritos">
+      <ion-icon slot="icon-only" name="refresh-outline"></ion-icon>
+    </ion-button>
+  </div>
+
+  <ion-list lines="none" class="lista">
+    @for (p of favoritos; track p.id) {
+      <app-parking-card [parqueo]="p"></app-parking-card>
+    }
+  </ion-list>
 </ion-content>
