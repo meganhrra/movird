@@ -1,11 +1,18 @@
 <ion-content [fullscreen]="true" scroll-y="false">
-  <div class="mapa">
-    <span class="calle">Av. Las Carreras</span>
-    <ion-icon name="location-sharp" class="pin" style="top: 30%; left: 18%"></ion-icon>
-    <ion-icon name="location-sharp" class="pin" style="top: 26%; left: 62%"></ion-icon>
-    <ion-icon name="location-sharp" class="pin" style="top: 70%; left: 68%"></ion-icon>
-    <div class="precio-pin" style="top: 56%; left: 42%">RD$75</div>
-  </div>
+  <div
+  class="mapa"
+  [style.transform]="'scale(' + escalaMapa + ')'"
+  (touchstart)="iniciarPellizco($event)"
+  (touchmove)="moverPellizco($event)"
+  (touchend)="terminarPellizco()"
+  (touchcancel)="terminarPellizco()"
+>
+  <span class="calle">Av. Las Carreras</span>
+  <ion-icon name="location-sharp" class="pin" style="top: 30%; left: 18%"></ion-icon>
+  <ion-icon name="location-sharp" class="pin" style="top: 26%; left: 62%"></ion-icon>
+  <ion-icon name="location-sharp" class="pin" style="top: 70%; left: 68%"></ion-icon>
+  <div class="precio-pin" style="top: 56%; left: 42%">RD$75</div>
+</div>
 
   <div class="barra-superior">
     <ion-menu-button class="menu-flotante"></ion-menu-button>
