@@ -11,6 +11,8 @@ ion-content {
     linear-gradient(90deg, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
   background-size: 28px 28px;
   overflow: hidden;
+  transform-origin: center center;
+touch-action: none;
 
   .calle {
     position: absolute;
