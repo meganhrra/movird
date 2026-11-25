@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { addIcons } from 'ionicons';
+import { closeOutline, heartOutline, homeOutline, mapOutline } from 'ionicons/icons';
 
 interface MenuPage {
   title: string;
@@ -18,4 +20,8 @@ export class AppComponent {
     { title: 'Mapa', url: '/mapa', icon: 'map' },
     { title: 'Favoritos', url: '/favoritos', icon: 'heart' },
   ];
+
+  constructor() {
+    addIcons({ closeOutline, heartOutline, homeOutline, mapOutline });
+  }
 }
