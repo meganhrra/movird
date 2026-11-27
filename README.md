@@ -42,6 +42,7 @@ src/
 │       ├── mapa/
 │       ├── favoritos/
 │       └── resultados/
+├── assets/img/              imágenes del mapa (capturas de Google Maps con los pines)
 ├── theme/variables.scss     colores
 └── global.scss              fuentes y estilos generales
 ```

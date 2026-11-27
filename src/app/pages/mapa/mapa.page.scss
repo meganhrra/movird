@@ -1,48 +1,32 @@
 ion-content {
-  --background: var(--movird-map);
+  --background: var(--movird-cream);
+}
+
+// El mapa ocupa toda la pantalla; el buscador y el panel van encima
+.visor-mapa {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: var(--movird-map);
+  touch-action: none;
 }
 
 .mapa {
   position: absolute;
-  inset: 0;
-  background-color: var(--movird-map);
-  background-image:
-    linear-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
-  background-size: 28px 28px;
-  overflow: hidden;
-  transform-origin: center center;
-  touch-action: none;
-
-  .calle {
-    position: absolute;
-    top: 52%;
-    left: 14px;
-    font-size: 11px;
-    color: var(--movird-muted);
-    transform: rotate(-4deg);
-  }
-  .pin {
-    position: absolute;
-    font-size: 32px;
-    color: var(--movird-red);
-  }
-  .precio-pin {
-    position: absolute;
-    background: var(--movird-red);
-    color: var(--movird-white);
-    font-size: 12px;
-    font-weight: 700;
-    padding: 5px 10px;
-    border-radius: 10px;
-  }
+  top: 0;
+  left: 0;
+  max-width: none;
+  transform-origin: 0 0;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
+// En la tablet la búsqueda y el panel se centran con el mismo ancho que Inicio (720px)
 .buscador-fila {
   position: absolute;
   top: 8px;
-  left: 16px;
-  right: 16px;
+  left: max(16px, calc((100% - 720px) / 2));
+  right: max(16px, calc((100% - 720px) / 2));
   display: flex;
   align-items: center;
   gap: 10px;
@@ -94,6 +78,36 @@ ion-content {
   background: var(--movird-cream);
   border-radius: 24px 24px 0 0;
   box-shadow: 0 -4px 16px rgba(74, 45, 42, 0.08);
+  transition: transform 0.25s ease;
+}
+
+// Bajado: solo se asoma la parte de arriba (92px, PANEL_ASOMADO en la página)
+.panel-inferior.bajado {
+  transform: translateY(calc(100% - 92px));
+}
+
+// Mientras el dedo arrastra, el panel lo sigue sin animación
+.panel-inferior.arrastrando {
+  transition: none;
+}
+
+.agarradera {
+  display: block;
+  width: 100%;
+  height: 20px;
+  margin: -8px 0 4px;
+  padding: 0;
+  background: transparent;
+
+  &::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 4px;
+    margin: 0 auto;
+    border-radius: 2px;
+    background: var(--movird-card-border);
+  }
 }
 
 .panel-titulo {
@@ -104,6 +118,9 @@ ion-content {
 }
 
 .cercanos {
+  // Alto fijo de 3 filas para que el panel no crezca y tape el mapa
+  height: 120px;
+  overflow-y: auto;
   background: transparent;
   padding: 0;
 
@@ -136,23 +153,10 @@ ion-content {
 }
 
 @media (min-width: 768px) {
-  // El panel queda a la izquierda, así que el nombre de la calle pasa a la derecha
-  .mapa .calle {
-    left: auto;
-    right: 24px;
-  }
-
-  .buscador-fila {
-    right: auto;
-    width: 440px;
-  }
-
+  // En la tablet el panel tiene el mismo ancho que el buscador
   .panel-inferior {
-    left: 16px;
-    right: auto;
-    bottom: 16px;
-    width: 400px;
-    border-radius: 24px;
+    left: max(16px, calc((100% - 720px) / 2));
+    right: max(16px, calc((100% - 720px) / 2));
   }
 }
 

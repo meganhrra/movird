@@ -7,6 +7,13 @@ describe('MapaPage', () => {
   let fixture: ComponentFixture<MapaPage>;
 
   beforeEach(() => {
+    // jsdom no trae ResizeObserver; para estas pruebas basta uno que no haga nada
+    globalThis.ResizeObserver ??= class {
+      observe() {}
+      unobserve() {}
+      disconnect() {}
+    };
+
     TestBed.configureTestingModule({
       providers: [provideRouter([])],
     });
