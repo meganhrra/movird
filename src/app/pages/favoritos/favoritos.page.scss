@@ -1,13 +1,19 @@
 .titulo {
-  margin: 8px 0 12px;
+  margin: 8px 0 4px;
   font-size: 26px;
-  color: var(--movird-ink, #292929);
+  color: var(--movird-ink);
 }
 
-.refresh-wrap {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 8px;
+.ayuda,
+.vacio {
+  margin: 0 0 16px;
+  font-size: 13px;
+  color: var(--movird-muted);
+}
+
+.vacio {
+  margin-top: 32px;
+  text-align: center;
 }
 
 .lista {

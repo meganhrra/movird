@@ -1,36 +1,36 @@
 ion-content {
-  --background: #efe6df;
+  --background: var(--movird-map);
 }
 
 .mapa {
   position: absolute;
   inset: 0;
-  background-color: #efe6df;
+  background-color: var(--movird-map);
   background-image:
     linear-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 1px),
     linear-gradient(90deg, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
   background-size: 28px 28px;
   overflow: hidden;
   transform-origin: center center;
-touch-action: none;
+  touch-action: none;
 
   .calle {
     position: absolute;
     top: 52%;
     left: 14px;
     font-size: 11px;
-    color: #777;
+    color: var(--movird-muted);
     transform: rotate(-4deg);
   }
   .pin {
     position: absolute;
     font-size: 32px;
-    color: var(--movird-red, #d94848);
+    color: var(--movird-red);
   }
   .precio-pin {
     position: absolute;
-    background: var(--movird-red, #d94848);
-    color: #fff;
+    background: var(--movird-red);
+    color: var(--movird-white);
     font-size: 12px;
     font-weight: 700;
     padding: 5px 10px;
@@ -38,40 +38,9 @@ touch-action: none;
   }
 }
 
-.barra-superior {
-  position: absolute;
-  top: calc(var(--ion-safe-area-top, 0px) + 16px);
-  left: 16px;
-  right: 16px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 2;
-
-  .menu-flotante {
-    position: absolute;
-    left: 0;
-    --background: #fff;
-    --border-radius: 50%;
-    --color: var(--movird-ink, #292929);
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    box-shadow: 0 4px 14px rgba(74, 45, 42, 0.1);
-  }
-}
-
-.titulo-chip {
-  background: #fff;
-  padding: 6px 14px;
-  border-radius: 14px;
-  font-size: 14px;
-  font-weight: 700;
-}
-
 .buscador-fila {
   position: absolute;
-  top: calc(var(--ion-safe-area-top, 0px) + 72px);
+  top: 8px;
   left: 16px;
   right: 16px;
   display: flex;
@@ -80,31 +49,151 @@ touch-action: none;
   z-index: 2;
 
   .buscador {
-    --background: #fff;
+    --background: var(--movird-white);
     --border-radius: 16px;
     --box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     padding: 0;
     flex: 1;
   }
 
-  .filtro-btn {
-    --background: var(--movird-red, #d94848);
+  .boton-filtro {
+    position: relative;
+    --background: var(--movird-red);
     --border-radius: 14px;
-    --color: #fff;
+    --color: var(--movird-white);
     width: 48px;
     height: 48px;
     margin: 0;
   }
+
+  // Punto blanco cuando hay filtros puestos
+  .boton-filtro.activo::after {
+    content: '';
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--movird-white);
+  }
 }
 
 .fab-ruta {
+  top: 72px;
   z-index: 2;
 }
 
-.tarjeta-inferior {
+.panel-inferior {
   position: absolute;
-  left: 12px;
-  right: 12px;
-  bottom: calc(var(--ion-safe-area-bottom, 0px) + 24px);
+  left: 0;
+  right: 0;
+  bottom: 0;
   z-index: 2;
+  padding: 12px 12px calc(var(--ion-safe-area-bottom, 0px) + 8px);
+  background: var(--movird-cream);
+  border-radius: 24px 24px 0 0;
+  box-shadow: 0 -4px 16px rgba(74, 45, 42, 0.08);
+}
+
+.panel-titulo {
+  margin: 12px 4px 4px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--movird-ink);
+}
+
+.cercanos {
+  background: transparent;
+  padding: 0;
+
+  ion-item {
+    --background: transparent;
+    --min-height: 40px;
+    --padding-start: 4px;
+    font-size: 14px;
+  }
+
+  ion-item.activo {
+    --background: var(--movird-coral-soft);
+    border-radius: 12px;
+  }
+
+  ion-icon {
+    color: var(--movird-red);
+    margin-inline-end: 10px;
+  }
+
+  ion-note {
+    font-size: 12px;
+  }
+
+  .sin-resultados {
+    margin: 8px 4px;
+    font-size: 13px;
+    color: var(--movird-muted);
+  }
+}
+
+@media (min-width: 768px) {
+  // El panel queda a la izquierda, así que el nombre de la calle pasa a la derecha
+  .mapa .calle {
+    left: auto;
+    right: 24px;
+  }
+
+  .buscador-fila {
+    right: auto;
+    width: 440px;
+  }
+
+  .panel-inferior {
+    left: 16px;
+    right: auto;
+    bottom: 16px;
+    width: 400px;
+    border-radius: 24px;
+  }
+}
+
+.modal-filtros {
+  ion-segment-button,
+  ion-button {
+    text-transform: none;
+  }
+
+  ion-toolbar {
+    --background: var(--movird-cream);
+  }
+
+  ion-content {
+    --background: var(--movird-cream);
+  }
+
+  .filtros-titulo {
+    margin: 4px 0 8px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--movird-ink);
+  }
+
+  ion-segment {
+    --background: var(--movird-white);
+  }
+
+  .filtros-lista {
+    margin: 16px 0;
+    background: transparent;
+
+    ion-item {
+      --background: var(--movird-white);
+      --border-radius: 14px;
+      margin-bottom: 8px;
+    }
+  }
+
+  .ver-resultados {
+    --border-radius: 14px;
+    margin-top: 8px;
+  }
 }

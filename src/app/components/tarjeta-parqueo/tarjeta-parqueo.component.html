@@ -1,0 +1,52 @@
+<ion-card
+  class="tarjeta"
+  (pointerdown)="iniciarPulsacion($event)"
+  (pointermove)="revisarMovimiento($event)"
+  (pointerup)="cancelarPulsacion()"
+  (pointerleave)="cancelarPulsacion()"
+  (pointercancel)="cancelarPulsacion()"
+  (contextmenu)="$event.preventDefault()"
+>
+  <ion-card-header class="encabezado">
+    <div class="caja-icono">
+      <ion-icon name="car-sport-outline"></ion-icon>
+    </div>
+    <div class="info">
+      <ion-card-title>{{ parqueo.nombre }}</ion-card-title>
+      <ion-card-subtitle>{{ parqueo.tipo }}</ion-card-subtitle>
+    </div>
+    <ion-button
+      fill="clear"
+      class="corazon"
+      [attr.aria-label]="parqueo.favorito ? 'Quitar de favoritos' : 'Guardar en favoritos'"
+      (pointerdown)="$event.stopPropagation()"
+      (click)="cambiarFavorito()"
+    >
+      <ion-icon slot="icon-only" [name]="parqueo.favorito ? 'heart' : 'heart-outline'"></ion-icon>
+    </ion-button>
+  </ion-card-header>
+
+  <ion-card-content class="contenido">
+    <p class="datos">
+      {{ parqueo.distancia }} • <strong>{{ parqueo.precio }}</strong> • {{ parqueo.horario }}
+    </p>
+
+    <div class="pie">
+      <span
+        class="etiqueta"
+        [class.confirmada]="parqueo.disponibilidad === 'disponible'"
+        [class.no-confirmada]="parqueo.disponibilidad !== 'disponible'"
+      >
+        {{
+          parqueo.disponibilidad === 'disponible'
+            ? 'Disponibilidad confirmada'
+            : 'Disponibilidad no confirmada'
+        }}
+      </span>
+      <ion-button fill="clear" size="small" class="ver-detalles">
+        Ver detalles
+        <ion-icon slot="end" name="chevron-forward-outline"></ion-icon>
+      </ion-button>
+    </div>
+  </ion-card-content>
+</ion-card>

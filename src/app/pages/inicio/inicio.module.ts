@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular/lazy';
 import { InicioPageRoutingModule } from './inicio-routing.module';
 import { InicioPage } from './inicio.page';
 
-import { ParkingCardComponent } from '../../components/parking-card/parking-card.component';
+import { TarjetaParqueoComponent } from '../../components/tarjeta-parqueo/tarjeta-parqueo.component';
 
 @NgModule({
   imports: [
@@ -15,7 +15,7 @@ import { ParkingCardComponent } from '../../components/parking-card/parking-card
     FormsModule,
     IonicModule,
     InicioPageRoutingModule,
-    ParkingCardComponent,
+    TarjetaParqueoComponent,
   ],
   declarations: [InicioPage],
 })

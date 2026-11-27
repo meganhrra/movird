@@ -1,0 +1,97 @@
+:host {
+  display: block;
+  width: 100%;
+}
+.tarjeta {
+  margin: 0;
+  padding: 14px 16px 10px;
+  border-radius: 18px;
+  background: var(--movird-white);
+  border: 1px solid var(--movird-card-border);
+  box-shadow: 0 2px 10px rgba(217, 72, 72, 0.06);
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+}
+.encabezado {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  padding: 0;
+}
+.caja-icono {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--movird-coral-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--movird-red);
+  font-size: 22px;
+}
+.info {
+  flex: 1;
+}
+ion-card-title {
+  --color: var(--movird-ink);
+  font-family: 'Manrope', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+}
+ion-card-subtitle {
+  --color: var(--movird-red);
+  margin: 2px 0 0;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+.contenido {
+  padding: 0;
+}
+.corazon {
+  --color: var(--movird-red);
+  --padding-start: 6px;
+  --padding-end: 6px;
+  height: 36px;
+  margin: 0 -6px 0 0;
+}
+.corazon ion-icon {
+  font-size: 22px;
+}
+.datos {
+  margin: 12px 0 8px;
+  font-size: 12px;
+  color: var(--movird-muted);
+}
+.datos strong {
+  color: var(--movird-ink);
+}
+.pie {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--movird-card-border);
+  padding-top: 6px;
+}
+.etiqueta {
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 10px;
+}
+.etiqueta.no-confirmada {
+  background: var(--movird-warn-bg);
+  color: var(--movird-warn-text);
+}
+.etiqueta.confirmada {
+  background: var(--movird-ok-bg);
+  color: var(--movird-ok-text);
+}
+.ver-detalles {
+  --color: var(--movird-red);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: none;
+}

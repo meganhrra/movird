@@ -34,10 +34,14 @@ src/
 ├── app/
 │   ├── app.component.*      menú lateral y split-pane
 │   ├── app-routing.module.ts
+│   ├── components/
+│   │   └── tarjeta-parqueo/ tarjeta de cada parqueo
+│   ├── data/parqueos.ts     datos de demostración
 │   └── pages/
 │       ├── inicio/
 │       ├── mapa/
-│       └── favoritos/
+│       ├── favoritos/
+│       └── resultados/
 ├── theme/variables.scss     colores
 └── global.scss              fuentes y estilos generales
 ```

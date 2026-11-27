@@ -1,0 +1,42 @@
+.filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 4px 0 8px;
+
+  ion-chip {
+    --background: var(--movird-white);
+    --color: var(--movird-ink);
+    margin: 0;
+    border: 1px solid var(--movird-card-border);
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  ion-chip.activo {
+    --background: var(--movird-red);
+    --color: var(--movird-white);
+    border-color: var(--movird-red);
+  }
+}
+
+.resumen {
+  margin: 8px 0 16px;
+  font-size: 13px;
+  color: var(--movird-muted);
+}
+
+.lista {
+  background: transparent;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.vacio {
+  margin: 32px 0;
+  text-align: center;
+  font-size: 13px;
+  color: var(--movird-muted);
+}
