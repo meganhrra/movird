@@ -8,25 +8,30 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
-  <ion-content [fullscreen]="true" class="ion-padding">
-    <ion-refresher slot="fixed" (ionRefresh)="actualizarFavoritos($event)">
-      <ion-refresher-content
-        pullingText="Desliza para actualizar"
-        refreshingText="Actualizando..."
-      ></ion-refresher-content>
-    </ion-refresher>
-    <h1 class="titulo">Mis favoritos</h1>
+<ion-content class="ion-padding contenido-centrado">
+  <ion-refresher slot="fixed" (ionRefresh)="actualizarFavoritos($event)">
+    <ion-refresher-content
+      pullingIcon="chevron-down-circle"
+      pullingText="Desliza para actualizar"
+      refreshingSpinner="crescent"
+      refreshingText="Actualizando..."
+    ></ion-refresher-content>
+  </ion-refresher>
 
+  <h1 class="titulo">Mis favoritos</h1>
+  <p class="ayuda">Desliza un parqueo a la izquierda para quitarlo.</p>
+
+  @if (favoritos().length > 0) {
     <ion-list lines="none" class="lista">
-      @for (p of favoritos; track p.id) {
-        <ion-item-sliding>
-          <ion-item lines="none" class="favorito-item">
-            <app-parking-card [parqueo]="p"></app-parking-card>
+      @for (p of favoritos(); track p.id) {
+        <ion-item-sliding (ionSwipe)="quitarFavorito(p)">
+          <ion-item class="item-tarjeta">
+            <app-tarjeta-parqueo [parqueo]="p" (favoritoChange)="alCambiarFavorito($event)">
+            </app-tarjeta-parqueo>
           </ion-item>
 
           <ion-item-options side="end">
-            <ion-item-option color="danger" (click)="quitarFavorito(p)">
+            <ion-item-option color="danger" expandable="true" (click)="quitarFavorito(p)">
               <ion-icon slot="start" name="trash-outline"></ion-icon>
               Eliminar
             </ion-item-option>
@@ -34,5 +39,9 @@
         </ion-item-sliding>
       }
     </ion-list>
-  </ion-content>
+  } @else {
+    <p class="vacio">
+      No tienes parqueos guardados. Toca el corazón de una tarjeta en Inicio para guardarla.
+    </p>
+  }
 </ion-content>

@@ -1,38 +1,129 @@
-<ion-content [fullscreen]="true" scroll-y="false">
-  <div
-  class="mapa"
-  [style.transform]="'scale(' + escalaMapa + ')'"
-  (touchstart)="iniciarPellizco($event)"
-  (touchmove)="moverPellizco($event)"
-  (touchend)="terminarPellizco()"
-  (touchcancel)="terminarPellizco()"
->
-  <span class="calle">Av. Las Carreras</span>
-  <ion-icon name="location-sharp" class="pin" style="top: 30%; left: 18%"></ion-icon>
-  <ion-icon name="location-sharp" class="pin" style="top: 26%; left: 62%"></ion-icon>
-  <ion-icon name="location-sharp" class="pin" style="top: 70%; left: 68%"></ion-icon>
-  <div class="precio-pin" style="top: 56%; left: 42%">RD$75</div>
-</div>
+<ion-header class="movird-header ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Mapa</ion-title>
+    <div class="header-spacer" slot="end"></div>
+  </ion-toolbar>
+</ion-header>
 
-  <div class="barra-superior">
-    <ion-menu-button class="menu-flotante"></ion-menu-button>
-    <span class="titulo-chip">Mapa</span>
+<ion-content [scrollY]="false">
+  <!-- Imagen ilustrativa del mapa: se amplía separando dos dedos -->
+  <div
+    class="mapa"
+    role="img"
+    aria-label="Mapa de parqueos de Santiago"
+    [style.transform]="'scale(' + escalaMapa + ')'"
+    (touchstart)="iniciarPellizco($event)"
+    (touchmove)="moverPellizco($event)"
+    (touchend)="terminarPellizco()"
+    (touchcancel)="terminarPellizco()"
+  >
+    <span class="calle">Av. Las Carreras</span>
+    <ion-icon name="location-sharp" class="pin" style="top: 30%; left: 18%"></ion-icon>
+    <ion-icon name="location-sharp" class="pin" style="top: 26%; left: 62%"></ion-icon>
+    <ion-icon name="location-sharp" class="pin" style="top: 46%; left: 68%"></ion-icon>
+    <div class="precio-pin" style="top: 38%; left: 38%">RD$75</div>
   </div>
 
   <div class="buscador-fila">
-    <ion-searchbar placeholder="Buscar lugar o zona" class="buscador"></ion-searchbar>
-    <ion-button class="filtro-btn" aria-label="Filtrar parqueos">
+    <ion-searchbar
+      placeholder="Buscar parqueo o zona"
+      class="buscador"
+      [value]="busqueda()"
+      (ionInput)="buscar($event.detail.value ?? '')"
+    ></ion-searchbar>
+    <ion-button
+      class="boton-filtro"
+      [class.activo]="hayFiltros()"
+      aria-label="Filtrar parqueos"
+      (click)="abrirFiltros()"
+    >
       <ion-icon slot="icon-only" name="options-outline"></ion-icon>
     </ion-button>
   </div>
 
-  <ion-fab vertical="center" horizontal="end" class="fab-ruta">
-    <ion-fab-button size="small" color="light" aria-label="Centrar mapa">
+  <ion-fab slot="fixed" vertical="top" horizontal="end" class="fab-ruta">
+    <ion-fab-button size="small" color="light" aria-label="Centrar mapa" (click)="recentrarMapa()">
       <ion-icon name="navigate-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 
-  <div class="tarjeta-inferior">
-    <app-parking-card [parqueo]="seleccionado"></app-parking-card>
+  <div class="panel-inferior">
+    <app-tarjeta-parqueo [parqueo]="seleccionado()"></app-tarjeta-parqueo>
+
+    <p class="panel-titulo">
+      {{ busqueda().trim() || hayFiltros() ? 'Resultados' : 'Cerca de aquí' }}
+    </p>
+    <ion-list lines="none" class="cercanos">
+      @for (p of cercanos(); track p.id) {
+        <ion-item
+          button
+          detail="false"
+          [class.activo]="p.id === seleccionado().id"
+          (click)="seleccionado.set(p)"
+        >
+          <ion-icon name="location-sharp" slot="start"></ion-icon>
+          <ion-label>{{ p.nombre }}</ion-label>
+          <ion-note slot="end">{{ p.distancia }}</ion-note>
+        </ion-item>
+      } @empty {
+        <p class="sin-resultados">No hay parqueos que coincidan.</p>
+      }
+    </ion-list>
   </div>
 </ion-content>
+
+<ion-modal
+  class="modal-filtros"
+  [isOpen]="filtrosAbiertos()"
+  [initialBreakpoint]="0.5"
+  [breakpoints]="[0, 0.5, 0.75]"
+  (didDismiss)="filtrosAbiertos.set(false)"
+>
+  <ng-template>
+    <ion-header class="ion-no-border">
+      <ion-toolbar>
+        <ion-title>Filtros</ion-title>
+        <ion-buttons slot="end">
+          <ion-button [disabled]="!hayFiltros()" (click)="limpiarFiltros()">Limpiar</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content class="ion-padding">
+      <p class="filtros-titulo">Tipo de parqueo</p>
+      <ion-segment [value]="filtros().tipo" (ionChange)="elegirTipo($event.detail.value)">
+        <ion-segment-button value="todos"><ion-label>Todos</ion-label></ion-segment-button>
+        <ion-segment-button value="Público"><ion-label>Públicos</ion-label></ion-segment-button>
+        <ion-segment-button value="Privado"><ion-label>Privados</ion-label></ion-segment-button>
+      </ion-segment>
+
+      <ion-list lines="none" class="filtros-lista">
+        <ion-item>
+          <ion-toggle
+            justify="space-between"
+            [checked]="filtros().soloAbiertos"
+            (ionChange)="cambiarFiltros({ soloAbiertos: $event.detail.checked })"
+          >
+            Abiertos ahora
+          </ion-toggle>
+        </ion-item>
+        <ion-item>
+          <ion-toggle
+            justify="space-between"
+            [checked]="filtros().soloConfirmados"
+            (ionChange)="cambiarFiltros({ soloConfirmados: $event.detail.checked })"
+          >
+            Solo disponibilidad confirmada
+          </ion-toggle>
+        </ion-item>
+      </ion-list>
+
+      <ion-button expand="block" class="ver-resultados" (click)="filtrosAbiertos.set(false)">
+        Ver {{ cercanos().length }} {{ cercanos().length === 1 ? 'parqueo' : 'parqueos' }}
+      </ion-button>
+    </ion-content>
+  </ng-template>
+</ion-modal>

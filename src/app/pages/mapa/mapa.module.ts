@@ -6,16 +6,10 @@ import { IonicModule } from '@ionic/angular/lazy';
 
 import { MapaPageRoutingModule } from './mapa-routing.module';
 import { MapaPage } from './mapa.page';
-import { ParkingCardComponent } from '../../components/parking-card/parking-card.component';
+import { TarjetaParqueoComponent } from '../../components/tarjeta-parqueo/tarjeta-parqueo.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    MapaPageRoutingModule,
-    ParkingCardComponent,
-  ],
+  imports: [CommonModule, FormsModule, IonicModule, MapaPageRoutingModule, TarjetaParqueoComponent],
   declarations: [MapaPage],
 })
 export class MapaPageModule {}

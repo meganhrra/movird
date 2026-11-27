@@ -1,14 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
+import { RefresherCustomEvent } from '@ionic/angular/lazy';
 import { addIcons } from 'ionicons';
 import {
   carSportOutline,
+  chevronDownCircle,
   homeOutline,
   locateOutline,
   locationSharp,
-  menuOutline,
   timeOutline,
 } from 'ionicons/icons';
-import { PARQUEOS } from '../../data/parking';
+import { PARQUEOS, coincideBusqueda } from '../../data/parqueos';
 
 @Component({
   selector: 'app-inicio',
@@ -17,22 +18,33 @@ import { PARQUEOS } from '../../data/parking';
   standalone: false,
 })
 export class InicioPage {
-  readonly opciones = PARQUEOS.slice(0, 1);
-
+  // Cada acceso abre Resultados con su filtro
   readonly categorias = [
-    { icono: 'home-outline', texto: 'Públicos' },
-    { icono: 'car-sport-outline', texto: 'Privados' },
-    { icono: 'time-outline', texto: 'Abiertos ahora' },
+    { id: 'publicos', icono: 'home-outline', texto: 'Públicos' },
+    { id: 'privados', icono: 'car-sport-outline', texto: 'Privados' },
+    { id: 'abiertos', icono: 'time-outline', texto: 'Abiertos ahora' },
   ];
+
+  busqueda = signal('');
+
+  // Sin búsqueda se muestran 3; con búsqueda, todos los que coincidan
+  opciones = computed(() => {
+    const texto = this.busqueda();
+    return texto.trim() ? PARQUEOS.filter((p) => coincideBusqueda(p, texto)) : PARQUEOS.slice(0, 3);
+  });
 
   constructor() {
     addIcons({
-      menuOutline,
-      homeOutline,
       carSportOutline,
-      timeOutline,
+      chevronDownCircle,
+      homeOutline,
       locateOutline,
       locationSharp,
+      timeOutline,
     });
+  }
+
+  actualizarOpciones(event: RefresherCustomEvent) {
+    setTimeout(() => event.target.complete(), 800);
   }
 }

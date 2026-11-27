@@ -68,8 +68,9 @@ ion-button {
   text-align: center;
 }
 
-.movird-header ion-menu-button {
-  --background: #ffffff;
+.movird-header ion-menu-button,
+.movird-header ion-back-button {
+  --background: var(--movird-white);
   --border-radius: 50%;
   --color: var(--movird-ink);
   width: 40px;
@@ -89,7 +90,48 @@ ion-button {
   }
 }
 
-.placeholder {
-  color: var(--movird-muted);
-  font-size: 13px;
+// Ítem de lista que solo contiene una tarjeta de parqueo. El fondo es el mismo
+// de la pantalla para que, en Favoritos, el botón rojo solo se vea al deslizar
+ion-item.item-tarjeta {
+  --background: var(--movird-cream);
+  --padding-start: 0;
+  --inner-padding-end: 0;
+}
+
+// Flecha y spinner del pull-to-refresh en el rojo de MoviRD
+ion-refresher-content ion-icon,
+ion-refresher-content ion-spinner {
+  color: var(--movird-red);
+}
+
+// En tablet el contenido no se estira de lado a lado
+@media (min-width: 768px) {
+  ion-content.contenido-centrado {
+    --padding-start: max(24px, calc((100% - 720px) / 2));
+    --padding-end: max(24px, calc((100% - 720px) / 2));
+  }
+}
+
+// Hoja de opciones de la pulsación larga
+.hoja-movird {
+  --button-color: var(--movird-ink);
+
+  .action-sheet-group:not(.action-sheet-group-cancel) {
+    border-radius: 24px 24px 0 0;
+  }
+
+  .action-sheet-title {
+    font-family: 'Manrope', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--movird-ink);
+  }
+
+  .action-sheet-sub-title {
+    color: var(--movird-muted);
+  }
+
+  .action-sheet-icon {
+    color: var(--movird-red);
+  }
 }

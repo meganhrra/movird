@@ -21,6 +21,11 @@ const routes: Routes = [
       import('./pages/favoritos/favoritos.module').then((m) => m.FavoritosPageModule),
   },
   {
+    path: 'resultados',
+    loadChildren: () =>
+      import('./pages/resultados/resultados.module').then((m) => m.ResultadosPageModule),
+  },
+  {
     path: '**',
     redirectTo: 'inicio',
   },

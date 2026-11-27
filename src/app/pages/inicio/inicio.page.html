@@ -1,27 +1,44 @@
-<ion-header class="ion-no-border">
+<ion-header class="movird-header ion-no-border">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-menu-button class="round-btn" menuIcon="menu-outline" aria-label="Abrir menú"></ion-menu-button>
+      <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Inicio</ion-title>
-    <ion-buttons slot="end">
-      <div class="avatar">AM</div>
-    </ion-buttons>
+    <div class="avatar" slot="end">AM</div>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
+<ion-content class="ion-padding contenido-centrado">
+  <ion-refresher slot="fixed" (ionRefresh)="actualizarOpciones($event)">
+    <ion-refresher-content
+      pullingIcon="chevron-down-circle"
+      pullingText="Desliza para actualizar"
+      refreshingSpinner="crescent"
+      refreshingText="Actualizando..."
+    ></ion-refresher-content>
+  </ion-refresher>
+
   <p class="ciudad">SANTIAGO DE LOS CABALLEROS</p>
   <h1 class="saludo">¡Hola! ¿A dónde te diriges?</h1>
 
-  <ion-searchbar placeholder="Buscar lugar o zona" class="buscador"></ion-searchbar>
+  <ion-searchbar
+    placeholder="Buscar parqueo o zona"
+    class="buscador"
+    [value]="busqueda()"
+    (ionInput)="busqueda.set($event.detail.value ?? '')"
+  ></ion-searchbar>
 
   <div class="categorias">
-    @for (c of categorias; track c.texto) {
-      <div class="categoria">
-        <div class="cat-icon"><ion-icon [name]="c.icono"></ion-icon></div>
-        <ion-label>{{ c.texto }}</ion-label>
-      </div>
+    @for (c of categorias; track c.id) {
+      <button
+        type="button"
+        class="categoria"
+        routerLink="/resultados"
+        [queryParams]="{ filtro: c.id }"
+      >
+        <span class="icono-categoria"><ion-icon [name]="c.icono"></ion-icon></span>
+        {{ c.texto }}
+      </button>
     }
   </div>
 
@@ -42,15 +59,21 @@
 
   <div class="seccion-header">
     <h2>Opciones para ti</h2>
-    <a>Ver todas</a>
+    <a routerLink="/resultados">Ver todas</a>
   </div>
 
-  @for (p of opciones; track p.id) {
-    <app-parking-card [parqueo]="p"></app-parking-card>
-  }
+  <ion-list lines="none" class="lista">
+    @for (p of opciones(); track p.id) {
+      <ion-item class="item-tarjeta">
+        <app-tarjeta-parqueo [parqueo]="p"></app-tarjeta-parqueo>
+      </ion-item>
+    } @empty {
+      <p class="vacio">No hay parqueos que coincidan.</p>
+    }
+  </ion-list>
 
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">
-    <ion-fab-button class="fab-ubicacion">
+    <ion-fab-button class="fab-ubicacion" routerLink="/mapa" aria-label="Cerca de mí">
       <ion-icon name="locate-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
