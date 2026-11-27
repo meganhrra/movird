@@ -6,7 +6,6 @@ import {
   chevronDownCircle,
   homeOutline,
   locateOutline,
-  locationSharp,
   timeOutline,
 } from 'ionicons/icons';
 import { PARQUEOS, coincideBusqueda } from '../../data/parqueos';
@@ -39,7 +38,6 @@ export class InicioPage {
       chevronDownCircle,
       homeOutline,
       locateOutline,
-      locationSharp,
       timeOutline,
     });
   }

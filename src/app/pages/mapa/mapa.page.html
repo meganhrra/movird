@@ -9,22 +9,24 @@
 </ion-header>
 
 <ion-content [scrollY]="false">
-  <!-- Imagen ilustrativa del mapa: se amplía separando dos dedos -->
+  <!-- Visor del mapa: con un dedo se mueve la imagen y con dos se acerca (pellizco) -->
   <div
-    class="mapa"
-    role="img"
-    aria-label="Mapa de parqueos de Santiago"
-    [style.transform]="'scale(' + escalaMapa + ')'"
-    (touchstart)="iniciarPellizco($event)"
-    (touchmove)="moverPellizco($event)"
-    (touchend)="terminarPellizco()"
-    (touchcancel)="terminarPellizco()"
+    #visor
+    class="visor-mapa"
+    (touchstart)="tocarMapa($event)"
+    (touchmove)="moverMapa($event)"
+    (touchend)="soltarMapa($event)"
+    (touchcancel)="soltarMapa($event)"
   >
-    <span class="calle">Av. Las Carreras</span>
-    <ion-icon name="location-sharp" class="pin" style="top: 30%; left: 18%"></ion-icon>
-    <ion-icon name="location-sharp" class="pin" style="top: 26%; left: 62%"></ion-icon>
-    <ion-icon name="location-sharp" class="pin" style="top: 46%; left: 68%"></ion-icon>
-    <div class="precio-pin" style="top: 38%; left: 38%">RD$75</div>
+    <img
+      class="mapa"
+      src="assets/img/mapa-santiago.webp"
+      alt="Mapa de parqueos en el centro de Santiago"
+      draggable="false"
+      [style.width.px]="anchoImagen()"
+      [style.height.px]="altoImagen()"
+      [style.transform]="transformacionMapa()"
+    />
   </div>
 
   <div class="buscador-fila">
@@ -50,7 +52,21 @@
     </ion-fab-button>
   </ion-fab>
 
-  <div class="panel-inferior">
+  <div
+    #panel
+    class="panel-inferior"
+    [class.bajado]="panelBajado()"
+    [class.arrastrando]="arrastrePanel() !== null"
+    [style.transform]="arrastrePanel()"
+  >
+    <!-- Se arrastra hacia abajo para ver más mapa (o se toca para bajar y subir) -->
+    <button
+      type="button"
+      class="agarradera"
+      [attr.aria-label]="panelBajado() ? 'Subir el panel' : 'Bajar el panel'"
+      (click)="cambiarPanel(!panelBajado())"
+    ></button>
+
     <app-tarjeta-parqueo [parqueo]="seleccionado()"></app-tarjeta-parqueo>
 
     <p class="panel-titulo">
